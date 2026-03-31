@@ -1,0 +1,96 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+---
+- launchApp
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Step 1: enter initial name ────────────────────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- inputText: "Original Name"
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 2: select DOB ────────────────────────────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        point: "50%, 32%"
+- waitForAnimationToEnd
+- tapOn:
+        text: "OK"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 3: fill address ──────────────────────────────────────────────────────
+- assertVisible:
+        text: "What is your residential address?"
+- tapOn:
+        id: "streetAddressField"
+- inputText: "789 Elm Street"
+- tapOn:
+        id: "cityField"
+- inputText: "Austin"
+- tapOn:
+        id: "postalCodeField"
+- inputText: "73301"
+- tapOn:
+        id: "countryField"
+- inputText: "United States"
+- tapOn:
+        text: "Profile Setup"
+- tapOn:
+        text: "Continue"
+- hideKeyboard
+- waitForAnimationToEnd
+
+# ── Step 4: verify review shows original name ─────────────────────────────────
+- assertVisible:
+        text: "Review your information"
+- assertVisible:
+        id: "reviewSection_name_editButton"
+
+# ── Edit name from review screen ──────────────────────────────────────────────
+- tapOn:
+        id: "reviewSection_name_editButton"
+- waitForAnimationToEnd
+
+# ── Update name in step 1 ─────────────────────────────────────────────────────
+- assertVisible:
+        text: "What is your full legal name?"
+- tapOn:
+        id: "fullNameField"
+- eraseText: 150
+- inputText: "Updated Name"
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Navigate back to review via steps 2 and 3 ────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Verify review shows updated name ─────────────────────────────────────────
+- assertVisible:
+        text: "Review your information"
+- assertVisible:
+        text: "Updated Name"
+- assertVisible:
+        id: "reviewSection_name_editButton"

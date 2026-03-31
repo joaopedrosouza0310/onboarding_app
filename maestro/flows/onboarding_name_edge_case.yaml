@@ -1,0 +1,25 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+---
+- launchApp
+# Wait for splash animation + auto-redirect to onboarding (2s)
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Edge case: mononym ────────────────────────────────────────────────────────
+- assertVisible:
+        text: "What is your full legal name?"
+- tapOn:
+        id: "fullNameField"
+- inputText: "Cher"
+- pressKey: Enter
+- waitForAnimationToEnd
+
+# Should advance to DOB — mononym is valid
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000

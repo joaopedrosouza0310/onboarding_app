@@ -1,0 +1,84 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+---
+- launchApp
+# Wait for splash animation + auto-redirect to onboarding (2s)
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Step 1: Enter name ────────────────────────────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- inputText: "Preservation Test"
+- pressKey: Enter
+- waitForAnimationToEnd
+
+# ── Step 2: Select DOB and advance ────────────────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        point: "50%, 32%"
+- waitForAnimationToEnd
+- tapOn:
+        text: "OK"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 3: Enter address ─────────────────────────────────────────────────────
+- tapOn:
+        id: "streetAddressField"
+- inputText: "456 Oak Ave"
+- tapOn:
+        id: "cityField"
+- inputText: "Chicago"
+- tapOn:
+        id: "postalCodeField"
+- inputText: "60601"
+- tapOn:
+        id: "countryField"
+- inputText: "United States"
+- tapOn:
+        text: "Profile Setup"
+
+# ── Go back to step 1 and verify data is still there ─────────────────────────
+- tapOn:
+        text: "Back"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Back"
+- waitForAnimationToEnd
+
+# Verify name is still pre-populated
+- assertVisible:
+        text: "Preservation Test"
+
+# Go forward again through step 2 ─────────────────────────────────────────────
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# Verify address is still populated ──────────────────────────────────────────
+- assertVisible:
+        id: "streetAddressField"
+- tapOn:
+        text: "Continue"
+- hideKeyboard
+- waitForAnimationToEnd
+
+# ── Verify review shows all preserved data ────────────────────────────────────
+- assertVisible:
+        text: "Review your information"
+- assertVisible:
+        id: "reviewSection_name_editButton"
+- assertVisible:
+        id: "reviewSection_address_editButton"

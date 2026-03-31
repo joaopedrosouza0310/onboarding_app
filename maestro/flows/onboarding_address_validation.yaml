@@ -1,0 +1,73 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+      - validation
+---
+- launchApp
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Step 1: advance with valid name ───────────────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- inputText: "Test User"
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 2: advance with valid DOB ────────────────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        point: "50%, 32%"
+- waitForAnimationToEnd
+- tapOn:
+        text: "OK"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 3: try to continue with all fields empty ─────────────────────────────
+- assertVisible:
+        text: "What is your residential address?"
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+- assertVisible:
+        text: "Street address is required."
+- assertVisible:
+        text: "City is required."
+
+# ── Fill only street and try again ────────────────────────────────────────────
+- tapOn:
+        id: "streetAddressField"
+- inputText: "100 Test St"
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+- assertVisible:
+        text: "City is required."
+
+# ── Fill all required fields and advance ──────────────────────────────────────
+- tapOn:
+        id: "cityField"
+- inputText: "New York"
+- tapOn:
+        id: "postalCodeField"
+- inputText: "10001"
+- tapOn:
+        id: "countryField"
+- inputText: "United States"
+- tapOn:
+        text: "Profile Setup"
+- tapOn:
+        text: "Continue"
+- hideKeyboard
+- waitForAnimationToEnd
+- assertVisible:
+        text: "Review your information"

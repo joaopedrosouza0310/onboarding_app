@@ -1,0 +1,6 @@
+{
+    "appId": "com.joaop.onboardingApp",
+    "platform": "ios",
+    "timeout": 60000,
+    "failOnCrash": true
+}

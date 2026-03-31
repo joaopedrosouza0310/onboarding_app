@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(maestro --version)",
+      "Bash(xcrun simctl:*)",
+      "Bash(maestro test:*)",
+      "Bash(maestro device:*)",
+      "Bash(maestro devices:*)",
+      "Read(//Users/joaopedrosouza/.maestro/tests/**)",
+      "Bash(flutter build:*)",
+      "Bash(grep -n \"id: \"\"dobPickerButton\"\"\" /Users/joaopedrosouza/Programming/onboarding_app/maestro/flows/*.yaml)",
+      "Bash(ls /Users/joaopedrosouza/.maestro/tests/2026-03-31_192002/*.png)",
+      "Bash(flutter test:*)"
+    ]
+  }
+}

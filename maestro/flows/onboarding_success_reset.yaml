@@ -1,0 +1,82 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+---
+- launchApp
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Step 1: name ──────────────────────────────────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- inputText: "Reset Test User"
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 2: DOB ───────────────────────────────────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        point: "50%, 32%"
+- waitForAnimationToEnd
+- tapOn:
+        text: "OK"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 3: address ───────────────────────────────────────────────────────────
+- assertVisible:
+        text: "What is your residential address?"
+- tapOn:
+        id: "streetAddressField"
+- inputText: "321 Reset Blvd"
+- tapOn:
+        id: "cityField"
+- inputText: "Seattle"
+- tapOn:
+        id: "postalCodeField"
+- inputText: "98101"
+- tapOn:
+        id: "countryField"
+- inputText: "United States"
+- tapOn:
+        text: "Profile Setup"
+- tapOn:
+        text: "Continue"
+- hideKeyboard
+- waitForAnimationToEnd
+
+# ── Step 4: review and submit ─────────────────────────────────────────────────
+- assertVisible:
+        text: "Review your information"
+- tapOn:
+        text: "Confirm & Finish"
+- waitForAnimationToEnd
+
+# ── Verify success page ───────────────────────────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              text: "You're all set!"
+        timeout: 10000
+
+# ── Tap Get Started and verify reset to onboarding ───────────────────────────
+- tapOn:
+        text: "Get Started"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# Fields should be cleared after reset
+- assertVisible:
+        text: "What is your full legal name?"
+- assertVisible:
+        id: "fullNameField"

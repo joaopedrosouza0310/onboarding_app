@@ -1,0 +1,79 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+---
+- launchApp
+# Wait for splash animation + auto-redirect to onboarding (2s)
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Step 1: Full legal name ───────────────────────────────────────────────────
+- assertVisible:
+        text: "What is your full legal name?"
+- tapOn:
+        id: "fullNameField"
+- inputText: "María José García-López"
+- pressKey: Enter
+- waitForAnimationToEnd
+
+# ── Step 2: Date of birth ─────────────────────────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        point: "50%, 32%"
+- waitForAnimationToEnd
+# Select year by scrolling if needed — picker opens at ~25 years ago
+- tapOn:
+        text: "OK"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 3: Address ───────────────────────────────────────────────────────────
+- assertVisible:
+        text: "What is your residential address?"
+- tapOn:
+        id: "streetAddressField"
+- inputText: "123 Main Street"
+- tapOn:
+        id: "cityField"
+- inputText: "San Francisco"
+- tapOn:
+        id: "stateField"
+- inputText: "California"
+- tapOn:
+        id: "postalCodeField"
+- inputText: "94105"
+- tapOn:
+        id: "countryField"
+- inputText: "United States"
+- tapOn:
+        text: "Profile Setup"
+- tapOn:
+        text: "Continue"
+- hideKeyboard
+- waitForAnimationToEnd
+
+# ── Step 4: Review ────────────────────────────────────────────────────────────
+- assertVisible:
+        text: "Review your information"
+- assertVisible:
+        id: "reviewSection_name_editButton"
+- assertVisible:
+        id: "reviewSection_dob_editButton"
+- assertVisible:
+        id: "reviewSection_address_editButton"
+- tapOn:
+        text: "Confirm & Finish"
+- waitForAnimationToEnd
+
+# ── Verify completion ─────────────────────────────────────────────────────────
+- extendedWaitUntil:
+        visible:
+              text: "You're all set!"
+        timeout: 10000

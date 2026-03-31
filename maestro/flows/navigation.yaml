@@ -1,0 +1,16 @@
+appId: com.joaop.onboardingApp
+tags:
+      - navigation
+---
+- launchApp
+# Wait for splash animation + auto-redirect to onboarding (2s)
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+- assertVisible:
+        text: "What is your full legal name?"
+- assertVisible:
+        id: "fullNameField"
+- assertVisible:
+        id: "nextButton"

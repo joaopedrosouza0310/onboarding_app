@@ -1,0 +1,336 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "fvm: pub get",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "pub",
+                "get"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "fvm: pub upgrade",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "pub",
+                "upgrade"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "fvm: build_runner (watch)",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "pub",
+                "run",
+                "build_runner",
+                "watch"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "isBackground": true
+        },
+        {
+            "label": "fvm: build_runner (build)",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "pub",
+                "run",
+                "build_runner",
+                "build",
+                "--delete-conflicting-outputs"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "fvm: flutter analyze",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "analyze"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "fvm: flutter test",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "test",
+                "--coverage"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "fvm: flutter test (watch)",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "flutter",
+                "test",
+                "--watch"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "isBackground": true
+        },
+        {
+            "label": "maestro: install",
+            "type": "shell",
+            "command": "curl",
+            "args": [
+                "-Ls",
+                "https://get.maestro.mobile.dev",
+                "|",
+                "bash"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: build ios app",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && sleep 5"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: run all flows",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: run onboarding happy path",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows/onboarding_happy_path.yaml"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: run name edge case",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows/onboarding_name_edge_case.yaml"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: run dob edge case",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows/onboarding_dob_edge_case.yaml"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: run address flow",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows/onboarding_address_flow.yaml"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: run navigation",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows/navigation.yaml"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "maestro: run onboarding navigation",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows/onboarding_navigation.yaml"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "fvm: clean & rebuild",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter clean && fvm flutter pub get && fvm flutter pub run build_runner build --delete-conflicting-outputs"
+            ],
+            "problemMatcher": [
+                "$dart"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "fvm: format code",
+            "type": "shell",
+            "command": "fvm",
+            "args": [
+                "dart",
+                "format",
+                "lib",
+                "test"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "type": "flutter",
+            "command": "dart",
+            "args": [
+                "run",
+                "build_runner",
+                "build"
+            ],
+            "problemMatcher": [
+                "$dart-build_runner"
+            ],
+            "group": "build",
+            "label": "flutter: dart run build_runner build",
+            "detail": ""
+        }
+    ]
+}

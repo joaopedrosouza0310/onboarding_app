@@ -1,0 +1,58 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+---
+- launchApp
+# Wait for splash animation + auto-redirect to onboarding (2s)
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Advance through steps 1 & 2 with valid data ───────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- inputText: "Test User"
+- pressKey: Enter
+- waitForAnimationToEnd
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        point: "50%, 32%"
+- waitForAnimationToEnd
+- tapOn:
+        text: "OK"
+- waitForAnimationToEnd
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 3: Fill address manually ─────────────────────────────────────────────
+- assertVisible:
+        text: "What is your residential address?"
+- tapOn:
+        id: "streetAddressField"
+- inputText: "456 Oak Ave"
+- tapOn:
+        id: "cityField"
+- inputText: "Oakland"
+- tapOn:
+        id: "postalCodeField"
+- inputText: "94612"
+- tapOn:
+        id: "countryField"
+- inputText: "United States"
+- tapOn:
+        text: "Profile Setup"
+- tapOn:
+        text: "Continue"
+- hideKeyboard
+- waitForAnimationToEnd
+
+# ── Verify review shows address ───────────────────────────────────────────────
+- assertVisible:
+        text: "Review your information"
+- assertVisible:
+        id: "reviewSection_address_editButton"

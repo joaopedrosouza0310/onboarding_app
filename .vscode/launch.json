@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "onboarding_app [Debug]",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "onboarding_app [Profile]",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "onboarding_app [Release]",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+---
+- launchApp
+# Wait for splash animation + auto-redirect to onboarding (2s)
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Step 1: enter a valid name to get past it ─────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- inputText: "Test User"
+- pressKey: Enter
+- waitForAnimationToEnd
+
+# ── Step 2: try to continue without selecting a date ─────────────────────────
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
+- tapOn:
+        text: "Continue"
+- waitForAnimationToEnd
+
+# Should show validation error
+- assertVisible:
+        text: "Please select your date of birth."

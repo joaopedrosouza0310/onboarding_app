@@ -1,0 +1,110 @@
+{
+  "[handlebars]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "debug.toolBarLocation": "commandCenter",
+  "dart.flutterCreatePlatforms": [
+    "android",
+    "ios"
+  ],
+  "dart.previewFlutterUiGuides": true,
+  "dashboard.storeProjectsInSettings": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "editor.fontSize": 12,
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.tokenColorCustomizations": {
+    "comments": "#98c371"
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.copyRelativePathSeparator": "/",
+  "extensions.ignoreRecommendations": true,
+  "files.autoSave": "afterDelay",
+  "files.exclude": {
+    "**/*.freezed.dart": true,
+    "**/*.g.dart": true,
+    "**/*.mocks.dart": true
+  },
+  "files.watcherExclude": {
+    "**/.fvm": true
+  },
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.replaceTagsWhenPull": true,
+  "git.ignoreRebaseWarning": true,
+  "git.openRepositoryInParentFolders": "always",
+  "redhat.telemetry.enabled": false,
+  "search.exclude": {
+    "**/.fvm": true
+  },
+  "window.confirmSaveUntitledWorkspace": false,
+  "window.zoomLevel": -0.6,
+  "workbench.iconTheme": "helium-icon-theme",
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 10,
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.colorTheme": "Dark+",
+  "workbench.editorAssociations": {
+    "{git,gitlens}:/**/*.{md,csv,svg}": "default"
+  },
+  "workbench.editor.scrollToSwitchTabs": true,
+  "diffEditor.ignoreTrimWhitespace": true,
+  "dart.showInspectorNotificationsForWidgetErrors": false,
+  "dart.debugExternalPackageLibraries": true,
+  "dart.debugSdkLibraries": true,
+  "accessibility.verbosity.inlineChat": false,
+  "editor.guides.indentation": false,
+  "lldb.library": "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB",
+  "lldb.launch.expressions": "native",
+  "[swift]": {
+    "editor.defaultFormatter": "sweetpad.sweetpad"
+  },
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "chat.tools.terminal.autoApprove": {
+    "touch": true,
+    "dart": true,
+    "find": true,
+    "flutter": true,
+    "rm": true,
+    "pod": true,
+    "xcrun": true,
+    "log": true,
+    "make": true,
+    "mkdir": true,
+    "unzip": true,
+    "open": true,
+    "xcodebuild": true,
+    "killall": true,
+    "fvm": true,
+    "pushd": true
+  },
+  "chat.viewSessions.orientation": "stacked",
+  "chat.agent.maxRequests": 100,
+  "claudeCode.preferredLocation": "panel",
+  "dart.flutterSdkPath": ".fvm/versions/3.38.7"
+}

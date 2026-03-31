@@ -1,0 +1,53 @@
+appId: com.joaop.onboardingApp
+tags:
+      - onboarding
+      - validation
+---
+- launchApp
+- extendedWaitUntil:
+        visible:
+              text: "Profile Setup"
+        timeout: 5000
+
+# ── Validation: empty name ────────────────────────────────────────────────────
+- assertVisible:
+        text: "What is your full legal name?"
+- tapOn:
+        id: "nextButton"
+- waitForAnimationToEnd
+- assertVisible:
+        text: "Please enter your full name."
+
+# ── Validation: invalid characters (numbers) ─────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- inputText: "John123"
+- tapOn:
+        id: "nextButton"
+- waitForAnimationToEnd
+- assertVisible:
+        text: "Please use only letters, spaces, hyphens, apostrophes, or periods."
+
+# ── Validation: invalid characters (symbols) ─────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- eraseText: 50
+- inputText: "Jane@Doe"
+- tapOn:
+        id: "nextButton"
+- waitForAnimationToEnd
+- assertVisible:
+        text: "Please use only letters, spaces, hyphens, apostrophes, or periods."
+
+# ── Valid input clears error and advances ─────────────────────────────────────
+- tapOn:
+        id: "fullNameField"
+- eraseText: 50
+- inputText: "Jane Doe"
+- tapOn:
+        id: "nextButton"
+- waitForAnimationToEnd
+- extendedWaitUntil:
+        visible:
+              id: "dobPickerButton"
+        timeout: 5000
