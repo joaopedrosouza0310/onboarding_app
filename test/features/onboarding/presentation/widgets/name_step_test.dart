@@ -75,10 +75,7 @@ void main() {
       var called = false;
       await tester.pumpWidget(buildSubject(onNext: () => called = true));
 
-      await tester.enterText(
-        find.byType(TextFormField),
-        'Anne-Marie O\'Brien',
-      );
+      await tester.enterText(find.byType(TextFormField), 'Anne-Marie O\'Brien');
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
 
@@ -89,10 +86,7 @@ void main() {
       var called = false;
       await tester.pumpWidget(buildSubject(onNext: () => called = true));
 
-      await tester.enterText(
-        find.byType(TextFormField),
-        'Sören Müller-Böhm',
-      );
+      await tester.enterText(find.byType(TextFormField), 'Sören Müller-Böhm');
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
 

@@ -49,6 +49,7 @@ dependencies:
   flutter_svg: ^2.0.17
   flutter_gen: ^5.10.0
 
+  vector_graphics: ^1.1.21
 dev_dependencies:
   flutter_test:
     sdk: flutter

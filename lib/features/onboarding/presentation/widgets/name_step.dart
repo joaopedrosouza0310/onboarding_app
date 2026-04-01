@@ -60,7 +60,7 @@ class _NameStepState extends State<NameStep> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          MaterialSpacing(height: 3),
+          const MaterialSpacing(height: 3),
           Text(
             'What is your full legal name?',
             style: context.textTheme.headlineSmall,
@@ -74,7 +74,7 @@ class _NameStepState extends State<NameStep> {
             ),
             textAlign: TextAlign.center,
           ),
-          MaterialSpacing(height: 4),
+          const MaterialSpacing(height: 4),
           OnboardingTextField(
             label: 'Full legal name',
             hint: 'e.g. María José García-López',

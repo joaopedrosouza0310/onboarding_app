@@ -123,17 +123,15 @@ void main() {
 
   group('OnboardingCubit — address autocomplete', () {
     const tSuggestions = [
-      AddressSuggestionEntity(
-        placeId: 'abc',
-        description: '123 Main St, SF',
-      ),
+      AddressSuggestionEntity(placeId: 'abc', description: '123 Main St, SF'),
     ];
 
     blocTest<OnboardingCubit, OnboardingState>(
       'searchAddress emits loading then suggestions on success',
       build: () {
-        when(() => mockSearchUseCase(any()))
-            .thenAnswer((_) async => const Result.success(tSuggestions));
+        when(
+          () => mockSearchUseCase(any()),
+        ).thenAnswer((_) async => const Result.success(tSuggestions));
         return cubit;
       },
       act: (c) => c.searchAddress('123 Main'),
@@ -207,8 +205,9 @@ void main() {
     blocTest<OnboardingCubit, OnboardingState>(
       'submit emits isSubmitting then isSubmitted on success',
       build: () {
-        when(() => mockSubmitUseCase(any()))
-            .thenAnswer((_) async => const Result.success(true));
+        when(
+          () => mockSubmitUseCase(any()),
+        ).thenAnswer((_) async => const Result.success(true));
         return cubit;
       },
       seed: () => OnboardingState(

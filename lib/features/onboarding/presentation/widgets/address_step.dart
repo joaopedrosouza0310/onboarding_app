@@ -131,13 +131,13 @@ class _AddressStepState extends State<AddressStep> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  MaterialSpacing(height: 3),
+                  const MaterialSpacing(height: 3),
                   Text(
                     'What is your residential address?',
                     style: context.textTheme.headlineSmall,
                     textAlign: TextAlign.center,
                   ),
-                  MaterialSpacing(height: 4),
+                  const MaterialSpacing(height: 4),
                   if (widget.isAutocompleteAvailable) ...[
                     _SearchField(
                       controller: _searchController,
@@ -154,13 +154,15 @@ class _AddressStepState extends State<AddressStep> {
                       ),
                     if (widget.suggestionsError != null)
                       _AutocompleteUnavailableBanner(
-                          message: widget.suggestionsError!),
+                        message: widget.suggestionsError!,
+                      ),
                     MaterialSpacing.heightDefault(),
                     const Divider(),
                     MaterialSpacing.heightMin(),
                   ] else ...[
                     _AutocompleteUnavailableBanner(
-                      message: widget.suggestionsError ??
+                      message:
+                          widget.suggestionsError ??
                           'Address search is unavailable. Please enter your address manually.',
                     ),
                     MaterialSpacing.heightDefault(),
@@ -191,7 +193,7 @@ class _AddressStepState extends State<AddressStep> {
                           onChanged: widget.onCityChanged,
                         ),
                       ),
-                      MaterialSpacing(width: 1.5),
+                      const MaterialSpacing(width: 1.5),
                       Expanded(
                         child: OnboardingTextField(
                           label: 'State / Province',
@@ -217,7 +219,7 @@ class _AddressStepState extends State<AddressStep> {
                           onChanged: widget.onPostalChanged,
                         ),
                       ),
-                      MaterialSpacing(width: 1.5),
+                      const MaterialSpacing(width: 1.5),
                       Expanded(
                         flex: 2,
                         child: OnboardingTextField(
@@ -232,7 +234,7 @@ class _AddressStepState extends State<AddressStep> {
                       ),
                     ],
                   ),
-                  MaterialSpacing(height: 3),
+                  const MaterialSpacing(height: 3),
                 ],
               ),
             ),
@@ -321,7 +323,7 @@ class _SuggestionList extends StatelessWidget {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: suggestions.length,
-        separatorBuilder: (_, __) => const Divider(height: 1),
+        separatorBuilder: (_, _) => const Divider(height: 1),
         itemBuilder: (context, index) {
           final suggestion = suggestions[index];
           return ListTile(
@@ -355,12 +357,14 @@ class _AutocompleteUnavailableBanner extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Icon(Icons.info_outline,
-              size: 16, color: colorScheme.onSecondaryContainer),
+          Icon(
+            Icons.info_outline,
+            size: 16,
+            color: colorScheme.onSecondaryContainer,
+          ),
           const SizedBox(width: 8),
           Expanded(
-            child:
-                Text(message, style: Theme.of(context).textTheme.bodySmall),
+            child: Text(message, style: Theme.of(context).textTheme.bodySmall),
           ),
         ],
       ),

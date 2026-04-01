@@ -21,8 +21,18 @@ class ReviewStep extends StatelessWidget {
 
   String _formatDate(DateTime date) {
     const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     return '${months[date.month - 1]} ${date.day}, ${date.year}';
   }
@@ -37,7 +47,7 @@ class ReviewStep extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                MaterialSpacing(height: 3),
+                const MaterialSpacing(height: 3),
                 Text(
                   'Review your information',
                   style: context.textTheme.headlineSmall,
@@ -51,7 +61,7 @@ class ReviewStep extends StatelessWidget {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                MaterialSpacing(height: 3),
+                const MaterialSpacing(height: 3),
                 _ReviewSection(
                   title: 'Full legal name',
                   semanticsIdentifier: 'reviewSection_name',
@@ -113,7 +123,7 @@ class ReviewStep extends StatelessWidget {
                     ),
                   ],
                 ),
-                MaterialSpacing(height: 3),
+                const MaterialSpacing(height: 3),
               ],
             ),
           ),

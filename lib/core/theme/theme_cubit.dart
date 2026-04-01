@@ -10,8 +10,8 @@ class ThemeCubit extends Cubit<ThemeMode> {
   static const _key = 'theme_mode';
 
   ThemeCubit(LocalStorageService storage)
-      : _storage = storage,
-        super(_resolve(storage));
+    : _storage = storage,
+      super(_resolve(storage));
 
   static ThemeMode _resolve(LocalStorageService storage) {
     switch (storage.getString(_key)) {

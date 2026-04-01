@@ -33,8 +33,9 @@ void main() {
   group('SubmitOnboardingUseCase', () {
     test('delegates to repository and returns success', () async {
       // Arrange
-      when(() => mockRepository.submit(any()))
-          .thenAnswer((_) async => const Result.success(true));
+      when(
+        () => mockRepository.submit(any()),
+      ).thenAnswer((_) async => const Result.success(true));
 
       // Act
       final result = await useCase(tEntity);
@@ -47,9 +48,8 @@ void main() {
     test('propagates repository failure', () async {
       // Arrange
       when(() => mockRepository.submit(any())).thenAnswer(
-        (_) async => const Result.failure(
-          AppFailure.network(message: 'No connection'),
-        ),
+        (_) async =>
+            const Result.failure(AppFailure.network(message: 'No connection')),
       );
 
       // Act
@@ -58,9 +58,8 @@ void main() {
       // Assert
       result.when(
         success: (_) => fail('Should not succeed'),
-        failure: (f) => f.whenOrNull(
-          network: (msg) => expect(msg, 'No connection'),
-        ),
+        failure: (f) =>
+            f.whenOrNull(network: (msg) => expect(msg, 'No connection')),
       );
     });
   });

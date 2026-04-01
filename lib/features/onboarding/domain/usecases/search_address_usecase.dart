@@ -5,7 +5,8 @@ import 'package:onboarding_app/features/onboarding/domain/entities/address_sugge
 import 'package:onboarding_app/features/onboarding/domain/repositories/places_repository.dart';
 
 @injectable
-class SearchAddressUseCase implements UseCase<List<AddressSuggestionEntity>, String> {
+class SearchAddressUseCase
+    implements UseCase<List<AddressSuggestionEntity>, String> {
   final PlacesRepository _repository;
 
   const SearchAddressUseCase(this._repository);

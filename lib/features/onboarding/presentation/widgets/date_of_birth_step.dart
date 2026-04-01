@@ -98,8 +98,18 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
 
   String _formatDate(DateTime date) {
     const months = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December',
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
     ];
     return '${months[date.month - 1]} ${date.day}, ${date.year}';
   }
@@ -116,7 +126,7 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        MaterialSpacing(height: 3),
+        const MaterialSpacing(height: 3),
         Text(
           'When were you born?',
           style: context.textTheme.headlineSmall,
@@ -130,7 +140,7 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
           ),
           textAlign: TextAlign.center,
         ),
-        MaterialSpacing(height: 4),
+        const MaterialSpacing(height: 4),
         Semantics(
           identifier: 'dobPickerButton',
           label: _selectedDate != null

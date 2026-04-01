@@ -39,7 +39,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
 
   // ── Step 2: Date of birth ──────────────────────────────────────────────────
 
-  void updateDateOfBirth(DateTime dob) => emit(state.copyWith(dateOfBirth: dob));
+  void updateDateOfBirth(DateTime dob) =>
+      emit(state.copyWith(dateOfBirth: dob));
 
   // ── Step 3: Address (manual edits) ────────────────────────────────────────
 
@@ -51,7 +52,8 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   void updateAddressState(String value) =>
       emit(state.copyWith(addressState: value));
 
-  void updatePostalCode(String value) => emit(state.copyWith(postalCode: value));
+  void updatePostalCode(String value) =>
+      emit(state.copyWith(postalCode: value));
 
   void updateCountry(String value) => emit(state.copyWith(country: value));
 
@@ -63,19 +65,23 @@ class OnboardingCubit extends Cubit<OnboardingState> {
       return;
     }
 
-    emit(state.copyWith(
-      isLoadingAddressSuggestions: true,
-      addressSuggestionsError: null,
-    ));
+    emit(
+      state.copyWith(
+        isLoadingAddressSuggestions: true,
+        addressSuggestionsError: null,
+      ),
+    );
 
     final result = await _searchAddressUseCase(query);
 
     result.when(
-      success: (suggestions) => emit(state.copyWith(
-        isLoadingAddressSuggestions: false,
-        addressSuggestions: suggestions,
-        isAddressAutocompleteAvailable: true,
-      )),
+      success: (suggestions) => emit(
+        state.copyWith(
+          isLoadingAddressSuggestions: false,
+          addressSuggestions: suggestions,
+          isAddressAutocompleteAvailable: true,
+        ),
+      ),
       failure: (failure) {
         final message = failure.when(
           server: (msg, _) => msg,
@@ -84,12 +90,14 @@ class OnboardingCubit extends Cubit<OnboardingState> {
           auth: (msg) => msg ?? 'Address search unavailable',
           unknown: (msg) => msg ?? 'Address search unavailable',
         );
-        emit(state.copyWith(
-          isLoadingAddressSuggestions: false,
-          addressSuggestions: const [],
-          isAddressAutocompleteAvailable: false,
-          addressSuggestionsError: message,
-        ));
+        emit(
+          state.copyWith(
+            isLoadingAddressSuggestions: false,
+            addressSuggestions: const [],
+            isAddressAutocompleteAvailable: false,
+            addressSuggestionsError: message,
+          ),
+        );
       },
     );
   }
@@ -97,31 +105,36 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   Future<void> selectAddressSuggestion(
     AddressSuggestionEntity suggestion,
   ) async {
-    emit(state.copyWith(
-      isLoadingAddressSuggestions: true,
-      addressSuggestions: const [],
-    ));
+    emit(
+      state.copyWith(
+        isLoadingAddressSuggestions: true,
+        addressSuggestions: const [],
+      ),
+    );
 
     final result = await _getAddressDetailsUseCase(suggestion.placeId);
 
     result.when(
-      success: (address) => emit(state.copyWith(
-        isLoadingAddressSuggestions: false,
-        streetAddress: address.streetAddress,
-        city: address.city,
-        addressState: address.addressState,
-        postalCode: address.postalCode,
-        country: address.country,
-      )),
-      failure: (_) =>
-          emit(state.copyWith(isLoadingAddressSuggestions: false)),
+      success: (address) => emit(
+        state.copyWith(
+          isLoadingAddressSuggestions: false,
+          streetAddress: address.streetAddress,
+          city: address.city,
+          addressState: address.addressState,
+          postalCode: address.postalCode,
+          country: address.country,
+        ),
+      ),
+      failure: (_) => emit(state.copyWith(isLoadingAddressSuggestions: false)),
     );
   }
 
   // ── Step 4: Submit ─────────────────────────────────────────────────────────
 
   Future<void> submit() async {
-    emit(state.copyWith(isSubmitting: true, isError: false, errorMessage: null));
+    emit(
+      state.copyWith(isSubmitting: true, isError: false, errorMessage: null),
+    );
 
     final entity = OnboardingDataEntity(
       fullName: state.fullName,
@@ -146,11 +159,13 @@ class OnboardingCubit extends Cubit<OnboardingState> {
           auth: (msg) => msg ?? 'Authentication error.',
           unknown: (msg) => msg ?? 'An unexpected error occurred.',
         );
-        emit(state.copyWith(
-          isSubmitting: false,
-          isError: true,
-          errorMessage: message,
-        ));
+        emit(
+          state.copyWith(
+            isSubmitting: false,
+            isError: true,
+            errorMessage: message,
+          ),
+        );
       },
     );
   }

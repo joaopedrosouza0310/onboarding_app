@@ -33,20 +33,20 @@ void main() {
       expect(find.text('Back'), findsOneWidget);
     });
 
-    testWidgets('shows error when no date selected and Next is tapped',
-        (tester) async {
+    testWidgets('shows error when no date selected and Next is tapped', (
+      tester,
+    ) async {
       await tester.pumpWidget(buildSubject());
 
       await tester.tap(find.text('Continue'));
       await tester.pumpAndSettle();
 
-      expect(
-        find.text('Please select your date of birth.'),
-        findsOneWidget,
-      );
+      expect(find.text('Please select your date of birth.'), findsOneWidget);
     });
 
-    testWidgets('does not call onNext when no date is selected', (tester) async {
+    testWidgets('does not call onNext when no date is selected', (
+      tester,
+    ) async {
       var called = false;
       await tester.pumpWidget(buildSubject(onNext: () => called = true));
 
@@ -66,11 +66,10 @@ void main() {
       expect(called, true);
     });
 
-    testWidgets('displays formatted date when initialDob is provided',
-        (tester) async {
-      await tester.pumpWidget(
-        buildSubject(initialDob: DateTime(1990, 5, 15)),
-      );
+    testWidgets('displays formatted date when initialDob is provided', (
+      tester,
+    ) async {
+      await tester.pumpWidget(buildSubject(initialDob: DateTime(1990, 5, 15)));
 
       expect(find.text('May 15, 1990'), findsOneWidget);
     });

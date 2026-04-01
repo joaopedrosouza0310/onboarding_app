@@ -31,10 +31,7 @@ class _SuccessPageState extends State<SuccessPage>
       parent: _controller,
       curve: Curves.elasticOut,
     );
-    _fadeAnimation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
+    _fadeAnimation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
   }
 
@@ -59,7 +56,7 @@ class _SuccessPageState extends State<SuccessPage>
                 opacity: _fadeAnimation,
                 child: Assets.images.keeperLogo.svg(width: 180),
               ),
-              MaterialSpacing(height: 5),
+              const MaterialSpacing(height: 5),
               ScaleTransition(
                 scale: _scaleAnimation,
                 child: Container(
@@ -76,7 +73,7 @@ class _SuccessPageState extends State<SuccessPage>
                   ),
                 ),
               ),
-              MaterialSpacing(height: 4),
+              const MaterialSpacing(height: 4),
               FadeTransition(
                 opacity: _fadeAnimation,
                 child: Text(

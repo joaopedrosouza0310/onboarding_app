@@ -25,8 +25,7 @@ class StorageKeys {
 class PlacesApiConstants {
   PlacesApiConstants._();
 
-  static String get apiKey =>
-      dotenv.env['GOOGLE_PLACES_API_KEY'] ?? '';
+  static String get apiKey => dotenv.env['GOOGLE_PLACES_API_KEY'] ?? '';
 }
 
 class OnboardingConstants {

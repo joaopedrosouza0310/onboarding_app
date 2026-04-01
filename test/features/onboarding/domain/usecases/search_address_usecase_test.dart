@@ -26,8 +26,9 @@ void main() {
   group('SearchAddressUseCase', () {
     test('returns suggestion list on success', () async {
       // Arrange
-      when(() => mockRepository.searchSuggestions(any()))
-          .thenAnswer((_) async => const Result.success(tSuggestions));
+      when(
+        () => mockRepository.searchSuggestions(any()),
+      ).thenAnswer((_) async => const Result.success(tSuggestions));
 
       // Act
       final result = await useCase('123 Main');
@@ -39,9 +40,9 @@ void main() {
 
     test('propagates network failure', () async {
       // Arrange
-      when(() => mockRepository.searchSuggestions(any())).thenAnswer(
-        (_) async => const Result.failure(AppFailure.network()),
-      );
+      when(
+        () => mockRepository.searchSuggestions(any()),
+      ).thenAnswer((_) async => const Result.failure(AppFailure.network()));
 
       // Act
       final result = await useCase('query');
