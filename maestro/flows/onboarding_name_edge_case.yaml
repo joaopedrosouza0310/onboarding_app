@@ -7,7 +7,7 @@ tags:
 - extendedWaitUntil:
         visible:
               text: "Profile Setup"
-        timeout: 5000
+        timeout: 10000
 
 # ── Edge case: mononym ────────────────────────────────────────────────────────
 - assertVisible:

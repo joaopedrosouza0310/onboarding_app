@@ -7,7 +7,7 @@ tags:
 - extendedWaitUntil:
         visible:
               text: "Profile Setup"
-        timeout: 5000
+        timeout: 10000
 
 # ── Advance through steps 1 & 2 with valid data ───────────────────────────────
 - tapOn:

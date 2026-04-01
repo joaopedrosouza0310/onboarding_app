@@ -9,6 +9,12 @@ A Flutter onboarding flow that collects user profile data across 4 steps before 
 - **Step 3 — Residential address**: Google Places Autocomplete with manual entry fallback
 - **Step 4 — Review**: All data displayed for confirmation before submission
 
+## Demo
+
+Happy path demo recorded with Maestro:
+
+![Onboarding happy path](assets/presentation/maestro_happy_path.gif)
+
 ## Getting Started
 
 ### Requirements
@@ -81,3 +87,15 @@ Common tasks are available via **Terminal → Run Task**:
 | `maestro: run all flows` | Build, install, and run all Maestro flows |
 | `fvm: build_runner (build)` | Regenerate `freezed` / `injectable` code |
 | `fvm: clean & rebuild` | Full clean + pub get + build_runner |
+
+## Maestro Tests
+
+Results of all Maestro flows:
+
+![Maestro flows](assets/presentation/maestro_tests.png)
+
+## Unit and Widget Tests
+
+Results of unit and widget tests:
+
+![Unit and widget tests](assets/presentation/unit_and_widget_tests.png)
