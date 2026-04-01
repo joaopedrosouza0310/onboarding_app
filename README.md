@@ -29,6 +29,7 @@ fvm flutter pub get
 ```
 
 Create a `.env` file at the project root:
+
 ```
 GOOGLE_PLACES_API_KEY=your_key_here
 ```
@@ -42,16 +43,19 @@ fvm flutter run
 ### Tests
 
 Unit and widget tests:
+
 ```bash
 fvm flutter test --coverage
 ```
 
 Maestro UI tests (requires a running simulator):
+
 ```bash
 maestro test --device <SIMULATOR_UDID> maestro/flows
 ```
 
 You can also run Maestro tasks from VSCode with `Cmd+Shift+B`, for example:
+
 - **maestro: run all flows** — runs all flows
 - **maestro: run onboarding happy path** — runs only the happy path
 
@@ -81,12 +85,12 @@ API keys are loaded from `.env` via `flutter_dotenv` — never via `--dart-defin
 
 Common tasks are available via **Terminal → Run Task**:
 
-| Task | Description |
-|---|---|
-| `fvm: flutter test` | Run all unit/widget tests with coverage |
-| `maestro: run all flows` | Build, install, and run all Maestro flows |
-| `fvm: build_runner (build)` | Regenerate `freezed` / `injectable` code |
-| `fvm: clean & rebuild` | Full clean + pub get + build_runner |
+| Task                        | Description                               |
+| --------------------------- | ----------------------------------------- |
+| `fvm: flutter test`         | Run all unit/widget tests with coverage   |
+| `maestro: run all flows`    | Build, install, and run all Maestro flows |
+| `fvm: build_runner (build)` | Regenerate `freezed` / `injectable` code  |
+| `fvm: clean & rebuild`      | Full clean + pub get + build_runner       |
 
 ## Maestro Tests
 
@@ -99,3 +103,35 @@ Results of all Maestro flows:
 Results of unit and widget tests:
 
 ![Unit and widget tests](assets/presentation/unit_and_widget_tests.png)
+
+## Internationalization (i18n)
+
+The app now supports 4 languages via `flutter_gen`:
+
+- `en` (default)
+- `es`
+- `ru`
+- `de`
+
+ARB files:
+
+- `lib/l10n/intl_en.arb`
+- `lib/l10n/intl_es.arb`
+- `lib/l10n/intl_ru.arb`
+- `lib/l10n/intl_de.arb`
+
+### Running the localization generator
+
+- `fvm flutter pub get`
+- `fvm flutter pub run build_runner build --delete-conflicting-outputs` (or automatic via `flutter gen-l10n` during Flutter build)
+
+### Nontranslated string helper command
+
+1. Normal (list missing keys only):
+   - `dart run tool/i18n_translate.dart`
+2. Fill missing translations with placeholders:
+   - `dart run tool/i18n_translate.dart --fill`
+3. Skeleton for Claude integration (markup):
+   - `dart run tool/i18n_translate.dart --claude`
+
+The script adds placeholder content to missing ARB keys and helps track coverage.

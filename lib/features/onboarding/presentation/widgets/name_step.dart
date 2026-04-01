@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:onboarding_app/core/extensions/context_extensions.dart';
-import 'package:onboarding_app/core/widgets/material_spacing.dart';
-import 'package:onboarding_app/features/onboarding/presentation/widgets/onboarding_text_field.dart';
+import 'package:onboarding_app/app/app_imports.dart';
 
 class NameStep extends StatefulWidget {
   final String initialName;
@@ -43,12 +40,16 @@ class _NameStepState extends State<NameStep> {
 
   String? _validateName(String? value) {
     final trimmed = value?.trim() ?? '';
-    if (trimmed.isEmpty) return 'Please enter your full name.';
-    if (trimmed.length > 150) return 'Name must be 150 characters or fewer.';
+    if (trimmed.isEmpty) {
+      return AppLocalizations.of(context)!.pleaseEnterFullName;
+    }
+    if (trimmed.length > 150) {
+      return AppLocalizations.of(context)!.nameMaxLength;
+    }
     // Allow Unicode letters, spaces, hyphens, apostrophes, periods.
     // This supports mononyms, diacritics, non-Latin scripts, hyphenated names.
     if (!RegExp(r"^[\p{L}\p{M} .'\-]+$", unicode: true).hasMatch(trimmed)) {
-      return 'Please use only letters, spaces, hyphens, apostrophes, or periods.';
+      return AppLocalizations.of(context)!.invalidNameCharacters;
     }
     return null;
   }
@@ -62,13 +63,13 @@ class _NameStepState extends State<NameStep> {
         children: [
           const MaterialSpacing(height: 3),
           Text(
-            'What is your full legal name?',
+            AppLocalizations.of(context)!.whatIsYourFullLegalName,
             style: context.textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),
           MaterialSpacing.heightMin(),
           Text(
-            'Enter your name exactly as it appears on your government-issued ID.',
+            AppLocalizations.of(context)!.nameInstruction,
             style: context.textTheme.bodyMedium?.copyWith(
               color: context.colorScheme.onSurface.withValues(alpha: 0.6),
             ),
@@ -76,8 +77,8 @@ class _NameStepState extends State<NameStep> {
           ),
           const MaterialSpacing(height: 4),
           OnboardingTextField(
-            label: 'Full legal name',
-            hint: 'e.g. María José García-López',
+            label: AppLocalizations.of(context)!.fullLegalNameLabel,
+            hint: AppLocalizations.of(context)!.fullLegalNameHint,
             controller: _nameController,
             keyboardType: TextInputType.name,
             textInputAction: TextInputAction.done,
@@ -91,7 +92,7 @@ class _NameStepState extends State<NameStep> {
           ),
           MaterialSpacing.heightMin(),
           Text(
-            'Supports all writing systems, mononyms, and hyphenated names.',
+            AppLocalizations.of(context)!.nameSupportText,
             style: context.textTheme.bodySmall?.copyWith(
               color: context.colorScheme.onSurface.withValues(alpha: 0.5),
             ),
@@ -103,7 +104,7 @@ class _NameStepState extends State<NameStep> {
               identifier: 'nextButton',
               child: ElevatedButton(
                 onPressed: _handleNext,
-                child: const Text('Continue'),
+                child: Text(AppLocalizations.of(context)!.continueButton),
               ),
             ),
           ),

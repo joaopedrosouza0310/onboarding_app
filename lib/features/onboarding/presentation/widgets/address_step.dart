@@ -1,10 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
-import 'package:onboarding_app/core/extensions/context_extensions.dart';
-import 'package:onboarding_app/core/widgets/material_spacing.dart';
-import 'package:onboarding_app/features/onboarding/domain/entities/address_suggestion_entity.dart';
-import 'package:onboarding_app/features/onboarding/presentation/widgets/onboarding_text_field.dart';
+import 'package:onboarding_app/app/app_imports.dart';
 
 class AddressStep extends StatefulWidget {
   final String streetAddress;
@@ -133,7 +129,7 @@ class _AddressStepState extends State<AddressStep> {
                 children: [
                   const MaterialSpacing(height: 3),
                   Text(
-                    'What is your residential address?',
+                    AppLocalizations.of(context)!.whatIsYourResidentialAddress,
                     style: context.textTheme.headlineSmall,
                     textAlign: TextAlign.center,
                   ),
@@ -163,18 +159,20 @@ class _AddressStepState extends State<AddressStep> {
                     _AutocompleteUnavailableBanner(
                       message:
                           widget.suggestionsError ??
-                          'Address search is unavailable. Please enter your address manually.',
+                          AppLocalizations.of(
+                            context,
+                          )!.addressSearchUnavailable,
                     ),
                     MaterialSpacing.heightDefault(),
                   ],
                   OnboardingTextField(
-                    label: 'Street address',
-                    hint: '123 Main St',
+                    label: AppLocalizations.of(context)!.streetAddress,
+                    hint: AppLocalizations.of(context)!.streetAddressHint,
                     controller: _streetController,
                     semanticsIdentifier: 'streetAddressField',
                     prefixIcon: const Icon(Icons.home_outlined),
                     validator: (v) => (v?.trim().isEmpty ?? true)
-                        ? 'Street address is required.'
+                        ? AppLocalizations.of(context)!.streetAddressRequired
                         : null,
                     onChanged: widget.onStreetChanged,
                   ),
@@ -184,11 +182,11 @@ class _AddressStepState extends State<AddressStep> {
                       Expanded(
                         flex: 2,
                         child: OnboardingTextField(
-                          label: 'City',
+                          label: AppLocalizations.of(context)!.cityLabel,
                           controller: _cityController,
                           semanticsIdentifier: 'cityField',
                           validator: (v) => (v?.trim().isEmpty ?? true)
-                              ? 'City is required.'
+                              ? AppLocalizations.of(context)!.cityRequired
                               : null,
                           onChanged: widget.onCityChanged,
                         ),
@@ -196,7 +194,9 @@ class _AddressStepState extends State<AddressStep> {
                       const MaterialSpacing(width: 1.5),
                       Expanded(
                         child: OnboardingTextField(
-                          label: 'State / Province',
+                          label: AppLocalizations.of(
+                            context,
+                          )!.stateProvinceLabel,
                           controller: _stateController,
                           semanticsIdentifier: 'stateField',
                           onChanged: widget.onStateChanged,
@@ -209,12 +209,12 @@ class _AddressStepState extends State<AddressStep> {
                     children: [
                       Expanded(
                         child: OnboardingTextField(
-                          label: 'Postal code',
+                          label: AppLocalizations.of(context)!.postalCodeLabel,
                           controller: _postalController,
                           semanticsIdentifier: 'postalCodeField',
                           keyboardType: TextInputType.number,
                           validator: (v) => (v?.trim().isEmpty ?? true)
-                              ? 'Postal code is required.'
+                              ? AppLocalizations.of(context)!.postalCodeRequired
                               : null,
                           onChanged: widget.onPostalChanged,
                         ),
@@ -223,11 +223,11 @@ class _AddressStepState extends State<AddressStep> {
                       Expanded(
                         flex: 2,
                         child: OnboardingTextField(
-                          label: 'Country',
+                          label: AppLocalizations.of(context)!.countryLabel,
                           controller: _countryController,
                           semanticsIdentifier: 'countryField',
                           validator: (v) => (v?.trim().isEmpty ?? true)
-                              ? 'Country is required.'
+                              ? AppLocalizations.of(context)!.countryRequired
                               : null,
                           onChanged: widget.onCountryChanged,
                         ),
@@ -246,7 +246,7 @@ class _AddressStepState extends State<AddressStep> {
                   identifier: 'backButton',
                   child: OutlinedButton(
                     onPressed: widget.onBack,
-                    child: const Text('Back'),
+                    child: Text(AppLocalizations.of(context)!.backButton),
                   ),
                 ),
               ),
@@ -256,7 +256,7 @@ class _AddressStepState extends State<AddressStep> {
                   identifier: 'nextButton',
                   child: ElevatedButton(
                     onPressed: _handleNext,
-                    child: const Text('Continue'),
+                    child: Text(AppLocalizations.of(context)!.continueButton),
                   ),
                 ),
               ),
@@ -290,8 +290,8 @@ class _SearchField extends StatelessWidget {
         textInputAction: TextInputAction.search,
         onChanged: onChanged,
         decoration: InputDecoration(
-          labelText: 'Search for your address',
-          hintText: 'Start typing your address…',
+          labelText: AppLocalizations.of(context)!.searchForYourAddress,
+          hintText: AppLocalizations.of(context)!.startTypingAddress,
           prefixIcon: const Icon(Icons.search),
           suffixIcon: isLoading
               ? const Padding(

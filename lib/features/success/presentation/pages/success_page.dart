@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:onboarding_app/core/di/injection.dart';
-import 'package:onboarding_app/core/extensions/context_extensions.dart';
-import 'package:onboarding_app/core/router/app_routes.dart';
-import 'package:onboarding_app/core/widgets/material_spacing.dart';
-import 'package:onboarding_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
-import 'package:onboarding_app/gen/assets.gen.dart';
+import 'package:onboarding_app/app/app_imports.dart';
 
 class SuccessPage extends StatefulWidget {
   const SuccessPage({super.key});
@@ -77,7 +70,7 @@ class _SuccessPageState extends State<SuccessPage>
               FadeTransition(
                 opacity: _fadeAnimation,
                 child: Text(
-                  "You're all set!",
+                  AppLocalizations.of(context)!.youreAllSet,
                   style: context.textTheme.headlineMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
@@ -88,7 +81,7 @@ class _SuccessPageState extends State<SuccessPage>
               FadeTransition(
                 opacity: _fadeAnimation,
                 child: Text(
-                  'Your profile has been successfully set up.\nWelcome aboard!',
+                  AppLocalizations.of(context)!.profileReady,
                   style: context.textTheme.bodyLarge?.copyWith(
                     color: colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
@@ -104,7 +97,7 @@ class _SuccessPageState extends State<SuccessPage>
                     getIt<OnboardingCubit>().reset();
                     context.go(AppRoutes.splash);
                   },
-                  child: const Text('Get Started'),
+                  child: Text(AppLocalizations.of(context)!.getStartedButton),
                 ),
               ),
               MaterialSpacing.heightDefault(),

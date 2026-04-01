@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:onboarding_app/core/constants/app_constants.dart';
-import 'package:onboarding_app/core/extensions/context_extensions.dart';
-import 'package:onboarding_app/core/widgets/material_spacing.dart';
+import 'package:onboarding_app/app/app_imports.dart';
 
 class DateOfBirthStep extends StatefulWidget {
   final DateTime? initialDob;
@@ -58,9 +55,9 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
       initialDate: _initialPickerDate,
       firstDate: _minDate,
       lastDate: _maxDate,
-      helpText: 'Select your date of birth',
-      fieldLabelText: 'Date of birth',
-      fieldHintText: 'MM/DD/YYYY',
+      helpText: AppLocalizations.of(context)!.selectYourDateOfBirth,
+      fieldLabelText: AppLocalizations.of(context)!.dateOfBirthLabel,
+      fieldHintText: AppLocalizations.of(context)!.dateOfBirthHint,
     );
     if (picked != null) {
       setState(() {
@@ -72,16 +69,18 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
   }
 
   String? _validate(DateTime? date) {
-    if (date == null) return 'Please select your date of birth.';
+    if (date == null) return AppLocalizations.of(context)!.pleaseSelectYourDob;
     if (date.isAfter(DateTime.now())) {
-      return 'Date of birth cannot be in the future.';
+      return AppLocalizations.of(context)!.dobInFutureError;
     }
     final age = _ageFromDob(date);
     if (age < OnboardingConstants.minimumAge) {
-      return 'You must be at least ${OnboardingConstants.minimumAge} years old.';
+      return AppLocalizations.of(
+        context,
+      )!.minimumAgeError(OnboardingConstants.minimumAge);
     }
     if (age > OnboardingConstants.maximumAge) {
-      return 'Please enter a valid date of birth.';
+      return AppLocalizations.of(context)!.invalidDateOfBirth;
     }
     return null;
   }
@@ -128,13 +127,15 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
       children: [
         const MaterialSpacing(height: 3),
         Text(
-          'When were you born?',
+          AppLocalizations.of(context)!.whenWereYouBorn,
           style: context.textTheme.headlineSmall,
           textAlign: TextAlign.center,
         ),
         MaterialSpacing.heightMin(),
         Text(
-          'You must be at least ${OnboardingConstants.minimumAge} years old to proceed.',
+          AppLocalizations.of(
+            context,
+          )!.minimumAgeInstruction(OnboardingConstants.minimumAge),
           style: context.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurface.withValues(alpha: 0.6),
           ),
@@ -153,7 +154,7 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
             borderRadius: BorderRadius.circular(12),
             child: InputDecorator(
               decoration: InputDecoration(
-                labelText: 'Date of birth',
+                labelText: AppLocalizations.of(context)!.dateOfBirthLabel,
                 prefixIcon: const Icon(Icons.calendar_today_outlined),
                 errorText: _errorText,
                 suffixIcon: const Icon(Icons.arrow_drop_down),
@@ -161,7 +162,7 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
               child: Text(
                 _selectedDate != null
                     ? _formatDate(_selectedDate!)
-                    : 'Tap to select',
+                    : AppLocalizations.of(context)!.tapToSelect,
                 style: context.textTheme.bodyLarge?.copyWith(
                   color: _selectedDate != null
                       ? colorScheme.onSurface
@@ -174,7 +175,7 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
         if (_selectedDate != null && _errorText == null) ...[
           MaterialSpacing.heightMin(),
           Text(
-            'Age: ${_ageFromDob(_selectedDate!)} years',
+            AppLocalizations.of(context)!.ageLabel(_ageFromDob(_selectedDate!)),
             style: context.textTheme.bodySmall?.copyWith(
               color: colorScheme.primary,
             ),
@@ -188,7 +189,7 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
                 identifier: 'backButton',
                 child: OutlinedButton(
                   onPressed: widget.onBack,
-                  child: const Text('Back'),
+                  child: Text(AppLocalizations.of(context)!.backButton),
                 ),
               ),
             ),
@@ -198,7 +199,7 @@ class _DateOfBirthStepState extends State<DateOfBirthStep> {
                 identifier: 'nextButton',
                 child: ElevatedButton(
                   onPressed: _handleNext,
-                  child: const Text('Continue'),
+                  child: Text(AppLocalizations.of(context)!.continueButton),
                 ),
               ),
             ),

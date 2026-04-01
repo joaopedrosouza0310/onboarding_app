@@ -50,6 +50,7 @@ maestro test --device <SIMULATOR_UDID> maestro/flows/onboarding_happy_path.yaml
 | `onboarding_address_flow.yaml` | Address filled manually → review shows correct data |
 | `onboarding_navigation.yaml` | Data is preserved when navigating back and forward between steps |
 | `onboarding_address_validation.yaml` | Required address fields show validation errors when empty |
+| `onboarding_address_autocomplete.yaml` | Address filled via Google Places autocomplete suggestion → fields auto-populated → review |
 | `onboarding_review_edit.yaml` | Edit button in review navigates back to step; updated data reflects on return |
 | `onboarding_success_reset.yaml` | Complete flow → success page → "Get Started" resets to step 1 |
 

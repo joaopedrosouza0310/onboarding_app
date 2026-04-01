@@ -280,6 +280,22 @@
             }
         },
         {
+            "label": "maestro: run address autocomplete",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "fvm flutter build ios --simulator && xcrun simctl install booted build/ios/iphonesimulator/Runner.app && sleep 3 && $HOME/.maestro/bin/maestro test -p ios maestro/flows/onboarding_address_autocomplete.yaml"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
             "label": "fvm: clean & rebuild",
             "type": "shell",
             "command": "sh",

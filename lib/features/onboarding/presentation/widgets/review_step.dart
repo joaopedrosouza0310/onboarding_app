@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:onboarding_app/core/extensions/context_extensions.dart';
-import 'package:onboarding_app/core/widgets/material_spacing.dart';
-import 'package:onboarding_app/features/onboarding/presentation/cubit/onboarding_state.dart';
+import 'package:onboarding_app/app/app_imports.dart';
 
 class ReviewStep extends StatelessWidget {
   final OnboardingState data;
@@ -49,13 +46,13 @@ class ReviewStep extends StatelessWidget {
               children: [
                 const MaterialSpacing(height: 3),
                 Text(
-                  'Review your information',
+                  AppLocalizations.of(context)!.reviewYourInformation,
                   style: context.textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 ),
                 MaterialSpacing.heightMin(),
                 Text(
-                  'Please confirm your details are correct before continuing.',
+                  AppLocalizations.of(context)!.confirmDetailsCorrect,
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.onSurface.withValues(alpha: 0.6),
                   ),
@@ -63,12 +60,12 @@ class ReviewStep extends StatelessWidget {
                 ),
                 const MaterialSpacing(height: 3),
                 _ReviewSection(
-                  title: 'Full legal name',
+                  title: AppLocalizations.of(context)!.fullLegalNameSection,
                   semanticsIdentifier: 'reviewSection_name',
                   onEdit: () => onEditStep(0),
                   children: [
                     _ReviewRow(
-                      label: 'Name',
+                      label: AppLocalizations.of(context)!.nameLabel,
                       value: data.fullName,
                       semanticsIdentifier: 'reviewFullName',
                     ),
@@ -76,12 +73,12 @@ class ReviewStep extends StatelessWidget {
                 ),
                 MaterialSpacing.heightDefault(),
                 _ReviewSection(
-                  title: 'Date of birth',
+                  title: AppLocalizations.of(context)!.dateOfBirthSection,
                   semanticsIdentifier: 'reviewSection_dob',
                   onEdit: () => onEditStep(1),
                   children: [
                     _ReviewRow(
-                      label: 'Date of birth',
+                      label: AppLocalizations.of(context)!.dateOfBirthLabel,
                       value: data.dateOfBirth != null
                           ? _formatDate(data.dateOfBirth!)
                           : '—',
@@ -91,33 +88,35 @@ class ReviewStep extends StatelessWidget {
                 ),
                 MaterialSpacing.heightDefault(),
                 _ReviewSection(
-                  title: 'Residential address',
+                  title: AppLocalizations.of(
+                    context,
+                  )!.residentialAddressSection,
                   semanticsIdentifier: 'reviewSection_address',
                   onEdit: () => onEditStep(2),
                   children: [
                     _ReviewRow(
-                      label: 'Street',
+                      label: AppLocalizations.of(context)!.streetLabel,
                       value: data.streetAddress,
                       semanticsIdentifier: 'reviewStreetAddress',
                     ),
                     _ReviewRow(
-                      label: 'City',
+                      label: AppLocalizations.of(context)!.cityLabel,
                       value: data.city,
                       semanticsIdentifier: 'reviewCity',
                     ),
                     if (data.addressState.isNotEmpty)
                       _ReviewRow(
-                        label: 'State / Province',
+                        label: AppLocalizations.of(context)!.stateProvinceLabel,
                         value: data.addressState,
                         semanticsIdentifier: 'reviewState',
                       ),
                     _ReviewRow(
-                      label: 'Postal code',
+                      label: AppLocalizations.of(context)!.postalCodeLabel,
                       value: data.postalCode,
                       semanticsIdentifier: 'reviewPostalCode',
                     ),
                     _ReviewRow(
-                      label: 'Country',
+                      label: AppLocalizations.of(context)!.countryLabel,
                       value: data.country,
                       semanticsIdentifier: 'reviewCountry',
                     ),
@@ -135,7 +134,7 @@ class ReviewStep extends StatelessWidget {
                 identifier: 'backButton',
                 child: OutlinedButton(
                   onPressed: isSubmitting ? null : onBack,
-                  child: const Text('Back'),
+                  child: Text(AppLocalizations.of(context)!.backButton),
                 ),
               ),
             ),
@@ -153,7 +152,7 @@ class ReviewStep extends StatelessWidget {
                             height: 20,
                             child: CircularProgressIndicator(strokeWidth: 2),
                           )
-                        : const Text('Confirm & Finish'),
+                        : Text(AppLocalizations.of(context)!.confirmAndFinish),
                   ),
                 ),
               ),

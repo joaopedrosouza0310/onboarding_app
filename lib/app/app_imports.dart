@@ -1,6 +1,7 @@
 // Third-party
 export 'package:flutter/material.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:flutter_localizations/flutter_localizations.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:get_it/get_it.dart';
 export 'package:go_router/go_router.dart';
@@ -9,3 +10,7 @@ export 'package:injectable/injectable.dart';
 export 'package:onboarding_app/core/core.dart';
 // Features
 export 'package:onboarding_app/features/features.dart';
+// Generated
+export 'package:onboarding_app/gen/assets.gen.dart';
+// Localization
+export 'package:onboarding_app/l10n/app_localizations.dart';

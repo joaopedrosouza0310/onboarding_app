@@ -1,18 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onboarding_app/core/extensions/context_extensions.dart';
-import 'package:onboarding_app/core/router/app_routes.dart';
-import 'package:onboarding_app/core/theme/theme_cubit.dart';
-import 'package:onboarding_app/core/widgets/bloc_consumer_x.dart';
-import 'package:onboarding_app/core/widgets/material_spacing.dart';
-import 'package:go_router/go_router.dart';
-import 'package:onboarding_app/features/onboarding/presentation/cubit/onboarding_cubit.dart';
-import 'package:onboarding_app/features/onboarding/presentation/cubit/onboarding_state.dart';
-import 'package:onboarding_app/features/onboarding/presentation/widgets/address_step.dart';
-import 'package:onboarding_app/features/onboarding/presentation/widgets/date_of_birth_step.dart';
-import 'package:onboarding_app/features/onboarding/presentation/widgets/name_step.dart';
-import 'package:onboarding_app/features/onboarding/presentation/widgets/onboarding_progress_indicator.dart';
-import 'package:onboarding_app/features/onboarding/presentation/widgets/review_step.dart';
+import 'package:onboarding_app/app/app_imports.dart';
+import 'package:onboarding_app/core/locale/locale_cubit.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -65,19 +52,78 @@ class _OnboardingPageState extends State<OnboardingPage> {
                 ? IconButton(
                     icon: const Icon(Icons.arrow_back),
                     onPressed: cubit.previousStep,
-                    tooltip: 'Go back',
+                    tooltip: AppLocalizations.of(context)!.goBackTooltip,
                   )
                 : null,
             automaticallyImplyLeading: false,
-            title: const Text('Profile Setup'),
+            title: Text(AppLocalizations.of(context)!.profileSetupTitle),
             actions: [
+              PopupMenuButton<String>(
+                icon: const Icon(Icons.language),
+                tooltip: AppLocalizations.of(context)!.languageMenuTooltip,
+                onSelected: (code) {
+                  context.read<LocaleCubit>().setLocale(Locale(code));
+                },
+                itemBuilder: (_) {
+                  final current = context
+                      .read<LocaleCubit>()
+                      .state
+                      .languageCode;
+                  return [
+                    PopupMenuItem(
+                      value: 'en',
+                      child: Text(
+                        'English',
+                        style: TextStyle(
+                          fontWeight: current == 'en'
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'es',
+                      child: Text(
+                        'Español',
+                        style: TextStyle(
+                          fontWeight: current == 'es'
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'ru',
+                      child: Text(
+                        'Русский',
+                        style: TextStyle(
+                          fontWeight: current == 'ru'
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'de',
+                      child: Text(
+                        'Deutsch',
+                        style: TextStyle(
+                          fontWeight: current == 'de'
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                  ];
+                },
+              ),
               IconButton(
                 icon: Icon(
                   context.theme.brightness == Brightness.dark
                       ? Icons.light_mode_outlined
                       : Icons.dark_mode_outlined,
                 ),
-                tooltip: 'Toggle theme',
+                tooltip: AppLocalizations.of(context)!.toggleThemeTooltip,
                 onPressed: () =>
                     context.read<ThemeCubit>().toggleTheme(context),
               ),

@@ -1,0 +1,87 @@
+appId: com.joaop.onboardingApp
+tags:
+  - onboarding
+  - address
+---
+- launchApp
+# Wait for splash animation + auto-redirect to onboarding (2s)
+- extendedWaitUntil:
+    visible:
+      text: "Profile Setup"
+    timeout: 10000
+
+# ── Step 1: Full legal name ───────────────────────────────────────────────────
+- tapOn:
+    id: "fullNameField"
+- inputText: "Test User"
+- pressKey: Enter
+- waitForAnimationToEnd
+
+# ── Step 2: Date of birth ─────────────────────────────────────────────────────
+- extendedWaitUntil:
+    visible:
+      id: "dobPickerButton"
+    timeout: 5000
+- tapOn:
+    point: "50%, 32%"
+- waitForAnimationToEnd
+- tapOn:
+    text: "OK"
+- waitForAnimationToEnd
+- tapOn:
+    text: "Continue"
+- waitForAnimationToEnd
+
+# ── Step 3: Search address via Google autocomplete ────────────────────────────
+- assertVisible:
+    text: "What is your residential address?"
+- tapOn:
+    id: "addressSearchField"
+- inputText: "1600 Amphitheatre Parkway"
+
+# Wait for Google Places suggestions to appear (debounce 350ms + API call)
+- extendedWaitUntil:
+    visible:
+      text: ".*Amphitheatre.*Mountain View.*"
+    timeout: 10000
+
+# Tap the first suggestion from the list
+- tapOn:
+    text: ".*Amphitheatre.*Mountain View.*"
+    index: 0
+- waitForAnimationToEnd
+
+# Verify that address fields were auto-populated from the suggestion
+- extendedWaitUntil:
+    visible:
+      id: "streetAddressField"
+    timeout: 5000
+- assertVisible:
+    id: "cityField"
+- assertVisible:
+    id: "postalCodeField"
+- assertVisible:
+    id: "countryField"
+
+# Continue to review
+- tapOn:
+    text: "Profile Setup"
+- tapOn:
+    text: "Continue"
+- hideKeyboard
+- waitForAnimationToEnd
+
+# ── Step 4: Review ────────────────────────────────────────────────────────────
+- assertVisible:
+    text: "Review your information"
+- assertVisible:
+    id: "reviewSection_address_editButton"
+- tapOn:
+    text: "Confirm & Finish"
+- waitForAnimationToEnd
+
+# ── Verify completion ─────────────────────────────────────────────────────────
+- extendedWaitUntil:
+    visible:
+      text: "You're all set!"
+    timeout: 10000

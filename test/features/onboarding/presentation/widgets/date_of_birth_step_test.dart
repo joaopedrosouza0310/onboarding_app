@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:onboarding_app/features/onboarding/presentation/widgets/date_of_birth_step.dart';
+import 'package:onboarding_app/l10n/app_localizations.dart';
 
 void main() {
   group('DateOfBirthStep', () {
@@ -11,6 +13,13 @@ void main() {
       VoidCallback? onBack,
     }) {
       return MaterialApp(
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
           body: Padding(
             padding: const EdgeInsets.all(24),

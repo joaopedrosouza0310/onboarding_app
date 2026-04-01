@@ -35,6 +35,7 @@ import '../../features/onboarding/domain/usecases/submit_onboarding_usecase.dart
     as _i933;
 import '../../features/onboarding/presentation/cubit/onboarding_cubit.dart'
     as _i807;
+import '../locale/locale_cubit.dart' as _i877;
 import '../services/analytics_service.dart' as _i222;
 import '../services/crashlytics_service.dart' as _i352;
 import '../storage/local_storage_service.dart' as _i744;
@@ -70,6 +71,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.singleton<_i348.PlacesRemoteDatasource>(
       () => _i877.PlacesRemoteDatasourceImpl(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i877.LocaleCubit>(
+      () => _i877.LocaleCubit(gh<_i744.LocalStorageService>()),
     );
     gh.lazySingleton<_i611.ThemeCubit>(
       () => _i611.ThemeCubit(gh<_i744.LocalStorageService>()),
